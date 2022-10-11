@@ -2,12 +2,13 @@ const fs = require('fs');
 const router = require('express').Router();
 const uuid = require('uuid');
 
-// API routes
+// API routes || GET
 router.get('/notes', (req, res) => {
     const data = fs.readFileSync('./db/db.json');
     res.json(JSON.parse(data));
 });
-
+ 
+// API routes || POST
 router.post("/notes", (req, res) => {
     const notes = JSON.parse(fs.readFileSync('./db/db.json'));
     const addNote = req.body;
@@ -17,6 +18,7 @@ router.post("/notes", (req, res) => {
     res.json(notes);
 });
 
+// API routes || delete
 router.delete('/notes/:id', (req, res) => {
     const notes = JSON.parse(fs.readFileSync('./db/db.json'));
     const removeNote = notes.filter((deleteNote) => deleteNote.id !== req.params.id);
